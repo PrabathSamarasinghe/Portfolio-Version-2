@@ -169,7 +169,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: terraform-plan
-          path: infra/cloudflare
+          path: terraform/web
 
       - name: Terraform Apply
         run: terraform apply -auto-approve tfplan
