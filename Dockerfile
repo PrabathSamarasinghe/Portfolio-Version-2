@@ -31,15 +31,15 @@ COPY --from=builder /app/apps/web/dist ./dist
 # Set ownership of app directory
 RUN chown -R appuser:appuser /app
 
+# Switch to non-root user BEFORE HEALTHCHECK
+USER appuser
+
 # Expose port 5000
 EXPOSE 5000
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD wget --no-verbose --tries=1 --spider http://localhost:5000/ || exit 1
-
-# Switch to non-root user
-USER appuser
 
 # Start the application
 CMD ["serve", "-s", "dist", "-l", "5000"]
