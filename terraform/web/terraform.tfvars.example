@@ -1,0 +1,3 @@
+cloudflare_account_id = "your_cloudflare_account_id_here"
+project_name          = "prabaths"
+production_branch     = "main"
