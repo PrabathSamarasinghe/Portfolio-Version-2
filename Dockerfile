@@ -3,12 +3,11 @@ FROM node:24-alpine AS builder
 
 WORKDIR /app
 
-# Copy root and app files
-COPY package*.json ./
+# Copy web app files
 COPY apps/web ./apps/web
 
 # Install dependencies
-RUN npm ci
+RUN cd apps/web && npm ci
 
 # Build the application
 RUN cd apps/web && npm run build
