@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Navigation from '../../components/Navigation';
 import { ThemeProvider } from '../../context/ThemeContext';
+import { NavigationConsts } from '../../constants/constants';
 
 describe('Navigation component', () => {
   test('toggles theme correctly', () => {
@@ -52,7 +53,7 @@ describe('Navigation component', () => {
     );
 
     // Check logo is rendered
-    expect(screen.getByText('alex.dev')).toBeInTheDocument();
+    expect(screen.getByText(NavigationConsts.navTag)).toBeInTheDocument();
 
     // Check nav links exist
     const aboutLink = screen.getAllByText('About');
