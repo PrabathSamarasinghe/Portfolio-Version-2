@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Download, ArrowDown, Github, Linkedin, ExternalLink, Code2 } from 'lucide-react';
+import { Download, Github, Linkedin, ExternalLink, Code2 } from 'lucide-react';
 import { personalInfo } from '../data/portfolio';
+import { HeroConsts } from '../constants/constants'
 
 export default function Hero() {
   const [titleIndex, setTitleIndex] = useState(0);
@@ -56,7 +57,7 @@ export default function Hero() {
           <div className="space-y-8">
             <div className="space-y-4">
               <p className="font-mono text-accent text-sm tracking-wider">
-                &gt; hello_world
+                &gt; {HeroConsts.helloWorld}
               </p>
               <h1 className="text-5xl md:text-7xl font-bold text-highlight leading-tight">
                 Hi, I'm{' '}
@@ -80,14 +81,14 @@ export default function Hero() {
             <div className="flex flex-wrap gap-4">
               <a href="#projects" className="btn-filled">
                 <Code2 size={18} />
-                View Projects
+                {HeroConsts.viewProjects}
               </a>
               <a href="#" className="btn-primary">
                 <Download size={18} />
-                Download CV
+                {HeroConsts.downloadCV}
               </a>
               <a href="#contact" className="btn-primary">
-                Contact Me
+                {HeroConsts.contactMe}
               </a>
             </div>
 
@@ -129,7 +130,7 @@ export default function Hero() {
                 <div className="terminal-dot" style={{ background: '#ff5f57' }} />
                 <div className="terminal-dot" style={{ background: '#febc2e' }} />
                 <div className="terminal-dot" style={{ background: '#28c840' }} />
-                <span className="ml-3 text-xs text-gray-500">about.ts</span>
+                <span className="ml-3 text-xs text-gray-500">{HeroConsts.aboutFile}</span>
               </div>
               <div className="terminal-body">
                 <div>
@@ -179,12 +180,6 @@ export default function Hero() {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-          <span className="text-xs text-secondary font-mono">scroll</span>
-          <ArrowDown size={16} className="text-accent" />
         </div>
       </div>
     </section>
