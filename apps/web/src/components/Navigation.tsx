@@ -2,23 +2,13 @@ import { useState, useEffect } from 'react';
 import { Menu, X, Moon, Sun, Terminal } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useActiveSection } from '../hooks/useAnimations';
-
-const navLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'GitHub', href: '#github' },
-  { label: 'Contact', href: '#contact' },
-];
-
-const sectionIds = ['hero', 'about', 'skills', 'projects', 'experience', 'github', 'contact'];
+import { NavigationConsts } from '../constants/constants';
 
 export default function Navigation() {
   const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const activeSection = useActiveSection(sectionIds);
+  const activeSection = useActiveSection(NavigationConsts.sectionIds);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -42,12 +32,12 @@ export default function Navigation() {
         <a href="#hero" className="flex items-center gap-2 group">
           <Terminal size={24} className="text-accent" />
           <span className="font-mono text-lg font-bold text-highlight group-hover:text-accent transition-colors">
-            alex.dev
+              { NavigationConsts.navTag }
           </span>
         </a>
 
         <div className="hidden md:flex items-center gap-1">
-          {navLinks.map(link => {
+          {NavigationConsts.navLinks.map(link => {
             const sectionId = link.href.slice(1);
             const isActive = activeSection === sectionId;
             return (
@@ -79,7 +69,7 @@ export default function Navigation() {
             href="#contact"
             className="hidden md:inline-flex btn-primary text-sm py-2 px-5"
           >
-            Let's Talk
+            {NavigationConsts.letsTalk}
           </a>
 
           <button
@@ -97,7 +87,7 @@ export default function Navigation() {
           <div className="flex items-center justify-between px-6 py-5">
             <a href="#hero" className="flex items-center gap-2">
               <Terminal size={24} className="text-accent" />
-              <span className="font-mono text-lg font-bold text-highlight">alex.dev</span>
+              <span className="font-mono text-lg font-bold text-highlight">{NavigationConsts.navTag}</span>
             </a>
             <button
               onClick={() => setIsMobileOpen(false)}
@@ -108,7 +98,7 @@ export default function Navigation() {
             </button>
           </div>
           <div className="flex flex-col items-center gap-6 pt-20">
-            {navLinks.map(link => (
+            {NavigationConsts.navLinks.map(link => (
               <a
                 key={link.href}
                 href={link.href}
@@ -123,7 +113,7 @@ export default function Navigation() {
               onClick={() => setIsMobileOpen(false)}
               className="btn-filled mt-4"
             >
-              Let's Talk
+              {NavigationConsts.letsTalk}
             </a>
           </div>
         </div>
