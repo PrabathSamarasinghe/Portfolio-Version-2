@@ -127,6 +127,14 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
+      - name: Import existing Cloudflare Pages project if not in state
+        run: |
+          terraform state show cloudflare_pages_project.frontend || \
+          terraform import cloudflare_pages_project.frontend ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/prabaths
+        env:
+          TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          TF_VAR_cloudflare_account_id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
       - name: Terraform Format Check
         run: terraform fmt -check
 
@@ -196,6 +204,14 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
+
+      - name: Import existing Cloudflare Pages project if not in state
+        run: |
+          terraform state show cloudflare_pages_project.frontend || \
+          terraform import cloudflare_pages_project.frontend ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/prabaths
+        env:
+          TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          TF_VAR_cloudflare_account_id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Download Terraform Plan
         uses: actions/download-artifact@v4
