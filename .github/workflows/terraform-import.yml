@@ -1,0 +1,29 @@
+name: Terraform Import Cloudflare Pages
+
+on:
+  workflow_dispatch:
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: terraform/web
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Import existing Cloudflare Pages project
+        run: terraform import cloudflare_pages_project.frontend ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/prabaths
+        env:
+          TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          TF_VAR_cloudflare_account_id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Verify Terraform State
+        run: terraform state list
