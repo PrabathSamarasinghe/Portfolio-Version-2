@@ -6,7 +6,6 @@ import Projects from './components/Projects';
 import Experience from './components/Experience';
 import Certifications from './components/Certifications';
 import GitHubActivity from './components/GitHubActivity';
-import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -22,7 +21,6 @@ function App() {
         <Experience />
         <Certifications />
         <GitHubActivity />
-        <Testimonials />
         <Contact />
       </main>
       <Footer />

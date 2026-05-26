@@ -1,6 +1,7 @@
 import { Briefcase, MapPin } from 'lucide-react';
 import { experience } from '../data/portfolio';
 import { useScrollAnimation } from '../hooks/useAnimations';
+import { ExperienceConsts } from '../constants/constants';
 
 export default function Experience() {
   const { ref, isVisible } = useScrollAnimation();
@@ -11,7 +12,7 @@ export default function Experience() {
         <div className="section-heading" ref={ref}>
           <h2>
             <span className="section-number">04.</span>
-            Experience
+            {ExperienceConsts.experience}
           </h2>
         </div>
 
