@@ -1,6 +1,7 @@
 import { Award, Trophy, Mic, Star, BookOpen, Flag } from 'lucide-react';
 import { certifications, achievements } from '../data/portfolio';
 import { useScrollAnimation } from '../hooks/useAnimations';
+import { CertificationsConsts } from '../constants/constants';
 
 const iconMap = [Trophy, Mic, Star, BookOpen, Flag, Award];
 
@@ -13,7 +14,7 @@ export default function Certifications() {
         <div className="section-heading" ref={ref}>
           <h2>
             <span className="section-number">05.</span>
-            Certifications & Achievements
+            {CertificationsConsts.certificationAndAchievements}
           </h2>
         </div>
 
@@ -22,7 +23,7 @@ export default function Certifications() {
           <div>
             <h3 className="text-lg font-semibold text-highlight mb-6 flex items-center gap-2">
               <Award size={20} className="text-accent" />
-              Certifications
+              {CertificationsConsts.certifications}
             </h3>
             <div className="space-y-4">
               {certifications.map((cert, index) => (
@@ -44,7 +45,7 @@ export default function Certifications() {
           <div>
             <h3 className="text-lg font-semibold text-highlight mb-6 flex items-center gap-2">
               <Trophy size={20} className="text-accent" />
-              Achievements
+              {CertificationsConsts.achievements}
             </h3>
             <div className="grid sm:grid-cols-2 gap-4">
               {achievements.map((achievement, index) => {

@@ -1,8 +1,7 @@
 import { Github, GitCommitVertical as GitCommit, Star, FolderGit2, Flame } from 'lucide-react';
 import { githubStats } from '../data/portfolio';
 import { useScrollAnimation } from '../hooks/useAnimations';
-
-const contributionColors = ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'];
+import { GitHubActivityConsts } from '../constants/constants';
 
 export default function GitHubActivity() {
   const { ref, isVisible } = useScrollAnimation();
@@ -13,7 +12,7 @@ export default function GitHubActivity() {
         <div className="section-heading" ref={ref}>
           <h2>
             <span className="section-number">06.</span>
-            GitHub & Coding Activity
+            {GitHubActivityConsts.githubActivity}
           </h2>
         </div>
 
@@ -40,9 +39,9 @@ export default function GitHubActivity() {
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-semibold text-highlight flex items-center gap-2">
                   <Github size={18} className="text-accent" />
-                  Contribution Graph
+                  {GitHubActivityConsts.contributionGraph}
                 </h3>
-                <span className="text-xs text-secondary font-mono">Last 12 months</span>
+                <span className="text-xs text-secondary font-mono">{GitHubActivityConsts.last12Months}</span>
               </div>
               <div className="overflow-x-auto pb-2">
                 <div className="flex gap-[3px] min-w-[720px]">
@@ -53,7 +52,7 @@ export default function GitHubActivity() {
                           key={di}
                           className="w-[12px] h-[12px] rounded-sm transition-colors duration-300"
                           style={{
-                            backgroundColor: contributionColors[day],
+                            backgroundColor: GitHubActivityConsts.contributionColors[day],
                             transitionDelay: `${(wi * 7 + di) * 2}ms`,
                           }}
                           title={`${day} contributions`}
@@ -64,17 +63,17 @@ export default function GitHubActivity() {
                 </div>
               </div>
               <div className="flex items-center gap-2 mt-3 text-xs text-secondary">
-                <span>Less</span>
-                {contributionColors.map((color, i) => (
+                <span>{GitHubActivityConsts.less}</span>
+                {GitHubActivityConsts.contributionColors.map((color, i) => (
                   <div key={i} className="w-[12px] h-[12px] rounded-sm" style={{ backgroundColor: color }} />
                 ))}
-                <span>More</span>
+                <span>{GitHubActivityConsts.more}</span>
               </div>
             </div>
 
             {/* Language distribution */}
             <div className="glass-card p-6">
-              <h3 className="font-semibold text-highlight mb-4">Top Languages</h3>
+              <h3 className="font-semibold text-highlight mb-4">{GitHubActivityConsts.topLanguages}</h3>
               <div className="space-y-4">
                 {githubStats.topLanguages.map(lang => (
                   <div key={lang.name}>
@@ -103,7 +102,7 @@ export default function GitHubActivity() {
                 className="btn-primary w-full justify-center mt-6 text-sm"
               >
                 <Github size={16} />
-                View GitHub Profile
+                {GitHubActivityConsts.viewProfile}
               </a>
             </div>
           </div>
