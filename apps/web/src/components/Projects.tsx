@@ -1,6 +1,7 @@
 import { Github, ExternalLink, ChevronRight } from 'lucide-react';
 import { projects } from '../data/portfolio';
 import { useScrollAnimation } from '../hooks/useAnimations';
+import { ProjectConsts } from '../constants/constants';
 
 export default function Projects() {
   const { ref, isVisible } = useScrollAnimation();
@@ -11,7 +12,7 @@ export default function Projects() {
         <div className="section-heading" ref={ref}>
           <h2>
             <span className="section-number">03.</span>
-            Featured Projects
+            {ProjectConsts.featuredProject}s
           </h2>
         </div>
 
@@ -66,7 +67,7 @@ export default function Projects() {
 
               {/* Project details */}
               <div className={`space-y-4 ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
-                <p className="font-mono text-accent text-sm">Featured Project</p>
+                <p className="font-mono text-accent text-sm">{ProjectConsts.featuredProject}</p>
                 <h3 className="text-2xl font-bold text-highlight">{project.title}</h3>
                 <div className="glass-card p-5">
                   <p className="text-secondary leading-relaxed">{project.description}</p>
@@ -102,7 +103,7 @@ export default function Projects() {
                       className="flex items-center gap-2 text-sm text-secondary hover:text-accent transition-colors"
                     >
                       <Github size={16} />
-                      Source Code
+                      {ProjectConsts.sourceCode}
                     </a>
                   )}
                   {project.demo && (
@@ -113,7 +114,7 @@ export default function Projects() {
                       className="flex items-center gap-2 text-sm text-secondary hover:text-accent transition-colors"
                     >
                       <ExternalLink size={16} />
-                      Live Demo
+                      {ProjectConsts.liveDemo}
                     </a>
                   )}
                 </div>
