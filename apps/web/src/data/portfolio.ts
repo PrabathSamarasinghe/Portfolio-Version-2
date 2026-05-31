@@ -16,7 +16,7 @@ export const personalInfo = {
   timezone: 'IST (UTC+5:30)',
   availability: 'Open to internships and opportunities',
   freelance: true,
-  github: 'https://github.com/prabhaths2001',
+  github: 'https://github.com/PrabathSamarasinghe',
   linkedin: 'https://linkedin.com/in/prabhaths2001',
   twitter: 'https://twitter.com/prabhaths2001',
   leetcode: 'https://leetcode.com/prabhaths2001',
@@ -227,16 +227,28 @@ export const githubStats = {
 };
 
 function generateContributionData() {
-  const data: number[][] = [];
+  const data: Array<Array<{ date: string; contributionCount: number }>> = [];
+  const today = new Date();
+  const currentDate = new Date(today);
+  currentDate.setDate(currentDate.getDate() - (52 * 7 - 1)); // Start from 52 weeks ago
+
   for (let week = 0; week < 52; week++) {
-    const weekData: number[] = [];
+    const weekData: Array<{ date: string; contributionCount: number }> = [];
     for (let day = 0; day < 7; day++) {
       const rand = Math.random();
-      if (rand < 0.3) weekData.push(0);
-      else if (rand < 0.5) weekData.push(1);
-      else if (rand < 0.7) weekData.push(2);
-      else if (rand < 0.85) weekData.push(3);
-      else weekData.push(4);
+      let count = 0;
+      if (rand < 0.3) count = 0;
+      else if (rand < 0.5) count = 1;
+      else if (rand < 0.7) count = 2;
+      else if (rand < 0.85) count = 3;
+      else count = 4;
+
+      const dateStr = currentDate.toISOString().split('T')[0];
+      weekData.push({
+        date: dateStr,
+        contributionCount: count,
+      });
+      currentDate.setDate(currentDate.getDate() + 1);
     }
     data.push(weekData);
   }

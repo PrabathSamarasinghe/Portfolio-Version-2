@@ -1,10 +1,27 @@
 import { Github, GitCommitVertical as GitCommit, Star, FolderGit2, Flame } from 'lucide-react';
-import { githubStats } from '../data/portfolio';
+import { useGitHubStats } from '../hooks/useGitHubStats';
 import { useScrollAnimation } from '../hooks/useAnimations';
 import { GitHubActivityConsts } from '../constants/constants';
 
 export default function GitHubActivity() {
   const { ref, isVisible } = useScrollAnimation();
+  const { githubStats, loading, error } = useGitHubStats();
+
+  if (error && !githubStats.totalRepos) {
+    return (
+      <section id="github" className="py-24 relative" style={{ backgroundColor: 'var(--color-primary-light)' }}>
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="section-heading" ref={ref}>
+            <h2>
+              <span className="section-number">06.</span>
+              GitHub & Coding Activity
+            </h2>
+          </div>
+          <div className="text-center text-red-500 py-12">Error loading GitHub stats: {error}</div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="github" className="py-24 relative" style={{ backgroundColor: 'var(--color-primary-light)' }}>
@@ -25,9 +42,9 @@ export default function GitHubActivity() {
               { icon: GitCommit, label: 'Contributions', value: githubStats.totalContributions.toLocaleString() },
               { icon: Flame, label: 'Day Streak', value: githubStats.streak },
             ].map(stat => (
-              <div key={stat.label} className="glass-card p-5 text-center">
+              <div key={stat.label} className={`glass-card p-5 text-center transition-opacity ${loading ? 'animate-pulse opacity-50' : 'opacity-100'}`}>
                 <stat.icon size={24} className="text-accent mx-auto mb-2" />
-                <p className="text-2xl font-bold text-highlight">{stat.value}</p>
+                <p className="text-2xl font-bold text-highlight">{loading ? '-' : stat.value}</p>
                 <p className="text-secondary text-xs mt-1">{stat.label}</p>
               </div>
             ))}
@@ -35,7 +52,7 @@ export default function GitHubActivity() {
 
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Contribution graph */}
-            <div className="lg:col-span-2 glass-card p-6">
+            <div className={`lg:col-span-2 glass-card p-6 transition-opacity ${loading ? 'animate-pulse opacity-50' : 'opacity-100'}`}>
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-semibold text-highlight flex items-center gap-2">
                   <Github size={18} className="text-accent" />
@@ -52,10 +69,10 @@ export default function GitHubActivity() {
                           key={di}
                           className="w-[12px] h-[12px] rounded-sm transition-colors duration-300"
                           style={{
-                            backgroundColor: GitHubActivityConsts.contributionColors[day],
+                            backgroundColor: GitHubActivityConsts.contributionColors[day.contributionCount],
                             transitionDelay: `${(wi * 7 + di) * 2}ms`,
                           }}
-                          title={`${day} contributions`}
+                          title={`${day.contributionCount} contributions on ${day.date}`}
                         />
                       ))}
                     </div>
@@ -72,7 +89,7 @@ export default function GitHubActivity() {
             </div>
 
             {/* Language distribution */}
-            <div className="glass-card p-6">
+            <div className={`glass-card p-6 transition-opacity ${loading ? 'animate-pulse opacity-50' : 'opacity-100'}`}>
               <h3 className="font-semibold text-highlight mb-4">{GitHubActivityConsts.topLanguages}</h3>
               <div className="space-y-4">
                 {githubStats.topLanguages.map(lang => (
